@@ -1,0 +1,9 @@
+target/
+.idea/
+
+*.class
+*.jar
+*.iml
+*.so
+
+notes.txt
