@@ -1,6 +1,6 @@
 # chnlzr-common
 
-Resample RF spectrum and stream it across the internet.
+common java package for interacting with Chnlzr services.
 
 ## Build and Install
 ```
