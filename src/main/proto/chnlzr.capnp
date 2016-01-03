@@ -43,10 +43,11 @@ struct BaseMessage {
 
 struct Error {
 
-  const errorUnknown   :UInt32 = 1;
-  const errorIncapable :UInt32 = 2;
-  const errorTooBusy   :UInt32 = 3;
-  const errorOverflow  :UInt32 = 4;
+  const errorUnknown               :UInt32 = 1;
+  const errorIncapable             :UInt32 = 2;
+  const errorProcessingUnavailable :UInt32 = 3;
+  const errorBandwidthUnavailable  :UInt32 = 4;
+  const errorOverflow              :UInt32 = 5;
 
   code @0 :UInt32;
 
