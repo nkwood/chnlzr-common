@@ -22,15 +22,15 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import org.capnproto.MessageBuilder;
 
-import java.util.concurrent.BlockingQueue;
+import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import static org.anhonesteffort.chnlzr.Proto.Error;
 
 public class WriteQueuingContext {
 
-  private   final ChannelHandlerContext         context;
-  protected final BlockingQueue<MessageBuilder> msgQueue;
+  private   final ChannelHandlerContext context;
+  protected final Queue<MessageBuilder> msgQueue;
 
   public WriteQueuingContext(ChannelHandlerContext context, int queueSize) {
     this.context = context;
