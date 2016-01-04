@@ -23,13 +23,9 @@ import java.util.Properties;
 
 public class ChnlzrConfig {
 
-  public static final int BYTES_PER_FLOAT   = 32 / 8;
-  public static final int FLOATS_PER_SAMPLE = 2;
-  public static final int BYTES_PER_SAMPLE  = BYTES_PER_FLOAT * FLOATS_PER_SAMPLE;
-
   protected final Properties properties;
-  private   final int        avgChannelRate;
-  private   final int        avgByteRate;
+  private   final int        bufferHighWaterMark;
+  private   final int        bufferLowWaterMark;
   private   final int        connectionTimeoutMs;
   private   final long       idleStateThresholdMs;
   private   final int        clientWriteQueueSize;
@@ -38,19 +34,19 @@ public class ChnlzrConfig {
     properties = new Properties();
     properties.load(new FileInputStream("chnlzr.properties"));
 
-    avgChannelRate       = Integer.parseInt(properties.getProperty("avg_channel_rate"));
-    avgByteRate          = BYTES_PER_SAMPLE * avgChannelRate;
+    bufferHighWaterMark  = Integer.parseInt(properties.getProperty("buffer_high_water_mark"));
+    bufferLowWaterMark   = Integer.parseInt(properties.getProperty("buffer_low_water_mark"));
     connectionTimeoutMs  = Integer.parseInt(properties.getProperty("connection_timeout_ms"));
     idleStateThresholdMs = Long.parseLong(properties.getProperty("idle_state_threshold_ms"));
     clientWriteQueueSize = Integer.parseInt(properties.getProperty("client_write_queue_size"));
   }
 
-  public int avgChannelRate() {
-    return avgChannelRate;
+  public int bufferHighWaterMark() {
+    return bufferHighWaterMark;
   }
 
-  public int avgByteRate() {
-    return avgByteRate;
+  public int bufferLowWaterMark() {
+    return bufferLowWaterMark;
   }
 
   public int connectionTimeoutMs() {
