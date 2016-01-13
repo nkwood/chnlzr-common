@@ -29,8 +29,8 @@ import static org.anhonesteffort.chnlzr.Proto.Error;
 
 public class WriteQueuingContext {
 
-  private   final ChannelHandlerContext context;
-  protected final Queue<MessageBuilder> msgQueue;
+  private final ChannelHandlerContext context;
+  private final Queue<MessageBuilder> msgQueue;
 
   public WriteQueuingContext(ChannelHandlerContext context, int queueSize) {
     this.context = context;
