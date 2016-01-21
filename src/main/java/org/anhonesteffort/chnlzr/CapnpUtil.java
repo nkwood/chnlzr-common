@@ -140,7 +140,7 @@ public class CapnpUtil {
     Samples.Builder     samples     = baseMessage.initSamples();
 
     baseMessage.setType(Type.SAMPLES);
-    samples.initSamples(sampleCount * 2);
+    samples.initSamples((sampleCount * 2) * Float.BYTES);
 
     return message;
   }

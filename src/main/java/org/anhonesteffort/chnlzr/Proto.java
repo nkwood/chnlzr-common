@@ -770,14 +770,17 @@ public final class Proto {
       public final boolean hasSamples() {
         return !_pointerFieldIsNull(0);
       }
-      public final org.capnproto.PrimitiveList.Float.Builder getSamples() {
-        return _getPointerField(org.capnproto.PrimitiveList.Float.factory, 0, null, 0);
+      public final org.capnproto.Data.Builder getSamples() {
+        return _getPointerField(org.capnproto.Data.factory, 0, null, 0, 0);
       }
-      public final void setSamples(org.capnproto.PrimitiveList.Float.Reader value) {
-        _setPointerField(org.capnproto.PrimitiveList.Float.factory, 0, value);
+      public final void setSamples(org.capnproto.Data.Reader value) {
+        _setPointerField(org.capnproto.Data.factory, 0, value);
       }
-      public final org.capnproto.PrimitiveList.Float.Builder initSamples(int size) {
-        return _initPointerField(org.capnproto.PrimitiveList.Float.factory, 0, size);
+      public final void setSamples(byte [] value) {
+        _setPointerField(org.capnproto.Data.factory, 0, new org.capnproto.Data.Reader(value));
+      }
+      public final org.capnproto.Data.Builder initSamples(int size) {
+        return _initPointerField(org.capnproto.Data.factory, 0, size);
       }
     }
 
@@ -786,11 +789,11 @@ public final class Proto {
         super(segment, data, pointers, dataSize, pointerCount, nestingLimit);
       }
 
-      public final boolean hasSamples() {
+      public boolean hasSamples() {
         return !_pointerFieldIsNull(0);
       }
-      public final org.capnproto.PrimitiveList.Float.Reader getSamples() {
-        return _getPointerField(org.capnproto.PrimitiveList.Float.factory, 0, null, 0);
+      public org.capnproto.Data.Reader getSamples() {
+        return _getPointerField(org.capnproto.Data.factory, 0, null, 0, 0);
       }
 
     }
@@ -2207,17 +2210,13 @@ public static final org.capnproto.SegmentReader b_d8c9d8110a4d55b1 =
    "\r\u0000\u0000\u0000\u0042\u0000\u0000\u0000" +
    "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
    "\u0008\u0000\u0000\u0000\u0003\u0000\u0001\u0000" +
-   "\u0024\u0000\u0000\u0000\u0002\u0000\u0001\u0000" +
+   "\u0014\u0000\u0000\u0000\u0002\u0000\u0001\u0000" +
    "\u0073\u0061\u006d\u0070\u006c\u0065\u0073\u0000" +
-   "\u000e\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
-   "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
-   "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
-   "\u0000\u0000\u0000\u0000\u0003\u0000\u0001\u0000" +
-   "\n\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
+   "\r\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
    "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
    "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
    "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
-   "\u000e\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
+   "\r\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
    "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" +
    "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000" + "");
 public static final org.capnproto.SegmentReader b_cf294e660c92303b =

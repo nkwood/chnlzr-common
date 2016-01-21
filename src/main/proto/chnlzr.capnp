@@ -99,7 +99,7 @@ struct ChannelState {
 
 struct Samples {
 
-  samples @0 :List(Float32);
+  samples @0 :Data;
 
 }
 
