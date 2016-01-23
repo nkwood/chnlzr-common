@@ -30,4 +30,9 @@ public class ProtocolErrorException extends Exception {
     return code;
   }
 
+  @Override
+  public String toString() {
+    return "CODE: " + code + " - " + super.toString();
+  }
+
 }
