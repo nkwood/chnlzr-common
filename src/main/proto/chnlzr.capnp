@@ -14,30 +14,27 @@ const polarizationCircular   :UInt32 = 3;
 struct BaseMessage {
 
   enum Type {
-    error            @0;
-    capabilities     @1;
-    channelRequest   @2;
-    channelState     @3;
-    samples          @4;
-    chnlzrHello      @5;
-    brkrHello        @6;
-    brkrState        @7;
-    multiplexRequest @8;
-    getBrkrList      @9;
-    brkrList        @10;
+    error          @0;
+    capabilities   @1;
+    channelRequest @2;
+    channelState   @3;
+    samples        @4;
+    chnlzrHello    @5;
+    punch          @6;
+    brkrState      @7;
+    getBrkrList    @8;
+    brkrList       @9;
   }
 
-  type             @0 :Type;
-  error            @1 :Error;
-  capabilities     @2 :Capabilities;
-  channelRequest   @3 :ChannelRequest;
-  channelState     @4 :ChannelState;
-  samples          @5 :Samples;
-  chnlzrHello      @6 :ChnlzrHello;
-  brkrHello        @7 :BrkrHello;
-  brkrState        @8 :BrkrState;
-  multiplexRequest @9 :MultiplexRequest;
-  brkrList        @10 :BrkrList;
+  type           @0 :Type;
+  error          @1 :Error;
+  capabilities   @2 :Capabilities;
+  channelRequest @3 :ChannelRequest;
+  channelState   @4 :ChannelState;
+  samples        @5 :Samples;
+  chnlzrHello    @6 :ChnlzrHello;
+  brkrState      @7 :BrkrState;
+  brkrList       @8 :BrkrList;
 
 }
 
@@ -77,19 +74,6 @@ struct ChannelRequest {
 
 }
 
-struct ChannelGrant {
-
-  id              @0 :UInt64;
-  latitude        @1 :Float64;
-  longitude       @2 :Float64;
-  polarization    @3 :UInt32;
-  centerFrequency @4 :Float64;
-  bandwidth       @5 :Float64;
-  sampleRate      @6 :UInt64;
-  maxRateDiff     @7 :UInt64;
-
-}
-
 struct ChannelState {
 
   centerFrequency @0 :Float64;
@@ -112,26 +96,13 @@ struct HostId {
 
 struct ChnlzrHello {
 
-  id @0 :HostId;
-
-}
-
-struct BrkrHello {
-
-  id @0 :HostId;
+  id @0 :Text;
 
 }
 
 struct BrkrState {
 
   chnlzrs @0 :List(Capabilities);
-  grants  @1 :List(ChannelGrant);
-
-}
-
-struct MultiplexRequest {
-
-  grantId @0 :UInt64;
 
 }
 

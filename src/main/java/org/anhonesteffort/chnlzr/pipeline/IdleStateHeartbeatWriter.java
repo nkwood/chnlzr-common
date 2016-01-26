@@ -23,7 +23,6 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.IdleStateEvent;
-import org.anhonesteffort.chnlzr.CloseOnFutureErrorListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,8 +40,7 @@ public class IdleStateHeartbeatWriter extends ChannelHandlerAdapter {
   @Override
   public void userEventTriggered(ChannelHandlerContext context, Object event) throws Exception {
     if (event instanceof IdleStateEvent) {
-      context.writeAndFlush(HEARTBEAT_BYTES.duplicate())
-             .addListener(new CloseOnFutureErrorListener(log, "heartbeat failed, closing idle connection"));
+      context.writeAndFlush(HEARTBEAT_BYTES.duplicate());
     } else {
       super.userEventTriggered(context, event);
     }

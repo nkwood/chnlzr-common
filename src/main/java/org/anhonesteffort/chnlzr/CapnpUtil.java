@@ -32,7 +32,6 @@ import static org.anhonesteffort.chnlzr.Proto.ChannelState;
 import static org.anhonesteffort.chnlzr.Proto.Samples;
 import static org.anhonesteffort.chnlzr.Proto.HostId;
 import static org.anhonesteffort.chnlzr.Proto.BrkrState;
-import static org.anhonesteffort.chnlzr.Proto.ChannelGrant;
 import static org.anhonesteffort.chnlzr.Proto.BaseMessage.Type;
 
 public class CapnpUtil {
@@ -145,37 +144,30 @@ public class CapnpUtil {
     return message;
   }
 
-  public static MessageBuilder chnlzrHello(String hostname, int port) {
+  public static MessageBuilder chnlzrHello(String id) {
     MessageBuilder      message     = new MessageBuilder();
     BaseMessage.Builder baseMessage = message.initRoot(BaseMessage.factory);
-    HostId.Builder      id          = baseMessage.initChnlzrHello().initId();
 
     baseMessage.setType(Type.CHNLZR_HELLO);
-    id.setHostname(hostname);
-    id.setPort(port);
+    baseMessage.initChnlzrHello().setId(id);
 
     return message;
   }
 
-  public static MessageBuilder brkrHello(HostId.Reader hostId) {
+  public static MessageBuilder punch() {
     MessageBuilder      message     = new MessageBuilder();
     BaseMessage.Builder baseMessage = message.initRoot(BaseMessage.factory);
 
-    baseMessage.setType(Type.BRKR_HELLO);
-    baseMessage.initBrkrHello().setId(hostId);
+    baseMessage.setType(Type.PUNCH);
 
     return message;
   }
 
-  // todo: gotta be a better way
-  public static MessageBuilder brkrState(List<Capabilities.Reader> capabilities,
-                                         List<ChannelGrant.Reader> grants)
-  {
+  public static MessageBuilder brkrState(List<Capabilities.Reader> capabilities) {
     MessageBuilder                           message     = new MessageBuilder();
     BaseMessage.Builder                      baseMessage = message.initRoot(BaseMessage.factory);
     BrkrState.Builder                        brkrState   = baseMessage.initBrkrState();
     StructList.Builder<Capabilities.Builder> capsList    = brkrState.initChnlzrs(capabilities.size());
-    StructList.Builder<ChannelGrant.Builder> grantsList  = brkrState.initGrants(grants.size());
 
     baseMessage.setType(Type.BRKR_STATE);
 
@@ -190,30 +182,6 @@ public class CapnpUtil {
       copy.setMaxFrequency(original.getMaxFrequency());
       copy.setMaxChannelRate(original.getMaxChannelRate());
     });
-
-    IntStream.range(0, grants.size()).forEach(i -> {
-      ChannelGrant.Reader  original = grants.get(i);
-      ChannelGrant.Builder copy     = grantsList.get(i);
-
-      copy.setId(original.getId());
-      copy.setLatitude(original.getLatitude());
-      copy.setLongitude(original.getLongitude());
-      copy.setPolarization(original.getPolarization());
-      copy.setCenterFrequency(original.getCenterFrequency());
-      copy.setBandwidth(original.getBandwidth());
-      copy.setSampleRate(original.getSampleRate());
-      copy.setMaxRateDiff(original.getMaxRateDiff());
-    });
-
-    return message;
-  }
-
-  public static MessageBuilder multiplexRequest(long grantId) {
-    MessageBuilder      message     = new MessageBuilder();
-    BaseMessage.Builder baseMessage = message.initRoot(BaseMessage.factory);
-
-    baseMessage.setType(Type.MULTIPLEX_REQUEST);
-    baseMessage.initMultiplexRequest().setGrantId(grantId);
 
     return message;
   }
@@ -254,12 +222,6 @@ public class CapnpUtil {
                                   capabilities.getMaxChannelRate());
   }
 
-  public static ChannelSpec spec(ChannelGrant.Reader request) {
-    return new ChannelSpec(request.getCenterFrequency(),
-                           request.getBandwidth(),
-                           request.getSampleRate());
-  }
-
   public static HostId.Reader hostId(String hostname, int port) {
     MessageBuilder message = new MessageBuilder();
     HostId.Builder id      = message.initRoot(HostId.factory);
@@ -268,43 +230,6 @@ public class CapnpUtil {
     id.setPort(port);
 
     return id.asReader();
-  }
-
-  public static ChannelGrant.Reader grant(long   id,
-                                          double latitude,
-                                          double longitude,
-                                          int    polarization,
-                                          double frequency,
-                                          double bandwidth,
-                                          long   sampleRate,
-                                          long   maxRateDiff)
-  {
-    MessageBuilder       message = new MessageBuilder();
-    ChannelGrant.Builder grant   = message.initRoot(ChannelGrant.factory);
-
-    grant.setId(id);
-    grant.setLatitude(latitude);
-    grant.setLongitude(longitude);
-    grant.setPolarization(polarization);
-    grant.setCenterFrequency(frequency);
-    grant.setBandwidth(bandwidth);
-    grant.setSampleRate(sampleRate);
-    grant.setMaxRateDiff(maxRateDiff);
-
-    return grant.asReader();
-  }
-
-  public static boolean grantSatisfiesRequest(ChannelGrant.Reader   grant,
-                                              ChannelRequest.Reader request)
-  {
-    double distanceBetween = Util.kmDistanceBetween(
-        grant.getLatitude(),   grant.getLongitude(),
-        request.getLatitude(), request.getLongitude()
-    );
-
-    return spec(grant).containsChannel(spec(request)) &&
-           (request.getPolarization() == 0 || grant.getPolarization() == request.getPolarization()) &&
-           (request.getMaxLocationDiff() <= 0 || distanceBetween <= request.getMaxLocationDiff());
   }
 
   public static String toString(HostId.Reader host) {
