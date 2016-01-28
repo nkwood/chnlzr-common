@@ -19,10 +19,6 @@ package org.anhonesteffort.chnlzr;
 
 import org.anhonesteffort.dsp.ChannelSpec;
 import org.capnproto.MessageBuilder;
-import org.capnproto.StructList;
-
-import java.util.List;
-import java.util.stream.IntStream;
 
 import static org.anhonesteffort.chnlzr.Proto.BaseMessage;
 import static org.anhonesteffort.chnlzr.Proto.Error;
@@ -30,8 +26,6 @@ import static org.anhonesteffort.chnlzr.Proto.Capabilities;
 import static org.anhonesteffort.chnlzr.Proto.ChannelRequest;
 import static org.anhonesteffort.chnlzr.Proto.ChannelState;
 import static org.anhonesteffort.chnlzr.Proto.Samples;
-import static org.anhonesteffort.chnlzr.Proto.HostId;
-import static org.anhonesteffort.chnlzr.Proto.BrkrState;
 import static org.anhonesteffort.chnlzr.Proto.BaseMessage.Type;
 
 public class CapnpUtil {
@@ -144,72 +138,6 @@ public class CapnpUtil {
     return message;
   }
 
-  public static MessageBuilder chnlzrHello(String id) {
-    MessageBuilder      message     = new MessageBuilder();
-    BaseMessage.Builder baseMessage = message.initRoot(BaseMessage.factory);
-
-    baseMessage.setType(Type.CHNLZR_HELLO);
-    baseMessage.initChnlzrHello().setId(id);
-
-    return message;
-  }
-
-  public static MessageBuilder punch() {
-    MessageBuilder      message     = new MessageBuilder();
-    BaseMessage.Builder baseMessage = message.initRoot(BaseMessage.factory);
-
-    baseMessage.setType(Type.PUNCH);
-
-    return message;
-  }
-
-  public static MessageBuilder brkrState(List<Capabilities.Reader> capabilities) {
-    MessageBuilder                           message     = new MessageBuilder();
-    BaseMessage.Builder                      baseMessage = message.initRoot(BaseMessage.factory);
-    BrkrState.Builder                        brkrState   = baseMessage.initBrkrState();
-    StructList.Builder<Capabilities.Builder> capsList    = brkrState.initChnlzrs(capabilities.size());
-
-    baseMessage.setType(Type.BRKR_STATE);
-
-    IntStream.range(0, capabilities.size()).forEach(i -> {
-      Capabilities.Reader  original = capabilities.get(i);
-      Capabilities.Builder copy     = capsList.get(i);
-
-      copy.setLatitude(original.getLatitude());
-      copy.setLongitude(original.getLongitude());
-      copy.setPolarization(original.getPolarization());
-      copy.setMinFrequency(original.getMinFrequency());
-      copy.setMaxFrequency(original.getMaxFrequency());
-      copy.setMaxChannelRate(original.getMaxChannelRate());
-    });
-
-    return message;
-  }
-
-  public static MessageBuilder getBrkrList() {
-    MessageBuilder      message     = new MessageBuilder();
-    BaseMessage.Builder baseMessage = message.initRoot(BaseMessage.factory);
-
-    baseMessage.setType(Type.GET_BRKR_LIST);
-
-    return message;
-  }
-
-  public static MessageBuilder brkrList(List<HostId.Reader> brkrHosts) {
-    MessageBuilder                     message     = new MessageBuilder();
-    BaseMessage.Builder                baseMessage = message.initRoot(BaseMessage.factory);
-    StructList.Builder<HostId.Builder> brkrs       = baseMessage.initBrkrList().initChnlbrkrs(brkrHosts.size());
-
-    baseMessage.setType(Type.BRKR_LIST);
-
-    IntStream.range(0, brkrHosts.size()).forEach(i -> {
-      brkrs.get(i).setHostname(brkrHosts.get(i).getHostname());
-      brkrs.get(i).setPort(brkrHosts.get(i).getPort());
-    });
-
-    return message;
-  }
-
   public static ChannelSpec spec(ChannelRequest.Reader request) {
     return new ChannelSpec(request.getCenterFrequency(),
                            request.getBandwidth(),
@@ -220,20 +148,6 @@ public class CapnpUtil {
     return ChannelSpec.fromMinMax(capabilities.getMinFrequency(),
                                   capabilities.getMaxFrequency(),
                                   capabilities.getMaxChannelRate());
-  }
-
-  public static HostId.Reader hostId(String hostname, int port) {
-    MessageBuilder message = new MessageBuilder();
-    HostId.Builder id      = message.initRoot(HostId.factory);
-
-    id.setHostname(hostname);
-    id.setPort(port);
-
-    return id.asReader();
-  }
-
-  public static String toString(HostId.Reader host) {
-    return host.getHostname().toString() + ":" + host.getPort();
   }
 
 }

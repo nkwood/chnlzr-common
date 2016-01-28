@@ -19,11 +19,6 @@ struct BaseMessage {
     channelRequest @2;
     channelState   @3;
     samples        @4;
-    chnlzrHello    @5;
-    punch          @6;
-    brkrState      @7;
-    getBrkrList    @8;
-    brkrList       @9;
   }
 
   type           @0 :Type;
@@ -32,9 +27,6 @@ struct BaseMessage {
   channelRequest @3 :ChannelRequest;
   channelState   @4 :ChannelState;
   samples        @5 :Samples;
-  chnlzrHello    @6 :ChnlzrHello;
-  brkrState      @7 :BrkrState;
-  brkrList       @8 :BrkrList;
 
 }
 
@@ -84,30 +76,5 @@ struct ChannelState {
 struct Samples {
 
   samples @0 :Data;
-
-}
-
-struct HostId {
-
-  hostname @0 :Text;
-  port     @1 :UInt32;
-
-}
-
-struct ChnlzrHello {
-
-  id @0 :Text;
-
-}
-
-struct BrkrState {
-
-  chnlzrs @0 :List(Capabilities);
-
-}
-
-struct BrkrList {
-
-  chnlbrkrs @0 :List(HostId);
 
 }
