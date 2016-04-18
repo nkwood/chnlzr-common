@@ -55,14 +55,10 @@ struct Capabilities {
 
 struct ChannelRequest {
 
-  latitude        @0 :Float64;
-  longitude       @1 :Float64;
-  maxLocationDiff @2 :Float64;
-  polarization    @3 :UInt32;
-  centerFrequency @4 :Float64;
-  bandwidth       @5 :Float64;
-  sampleRate      @6 :UInt64;
-  maxRateDiff     @7 :UInt64;
+  centerFrequency @0 :Float64;
+  bandwidth       @1 :Float64;
+  sampleRate      @2 :UInt64;
+  maxRateDiff     @3 :UInt64;
 
 }
 

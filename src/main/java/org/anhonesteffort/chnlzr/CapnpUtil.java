@@ -91,11 +91,7 @@ public class CapnpUtil {
     return message;
   }
 
-  public static ChannelRequest.Reader channelRequest(double latitude,
-                                                     double longitude,
-                                                     double maxLocationDiff,
-                                                     int    polarization,
-                                                     double frequency,
+  public static ChannelRequest.Reader channelRequest(double frequency,
                                                      double bandwidth,
                                                      long   sampleRate,
                                                      long   maxRateDiff)
@@ -103,10 +99,6 @@ public class CapnpUtil {
     MessageBuilder         message = new MessageBuilder();
     ChannelRequest.Builder request = message.initRoot(ChannelRequest.factory);
 
-    request.setLatitude(latitude);
-    request.setLongitude(longitude);
-    request.setMaxLocationDiff(maxLocationDiff);
-    request.setPolarization(polarization);
     request.setCenterFrequency(frequency);
     request.setBandwidth(bandwidth);
     request.setSampleRate(sampleRate);
