@@ -28,16 +28,17 @@ import static org.anhonesteffort.chnlzr.capnp.Proto.ChannelState;
 import static org.anhonesteffort.chnlzr.capnp.Proto.Samples;
 import static org.anhonesteffort.chnlzr.capnp.Proto.BaseMessage.Type;
 
-// todo: no static
-public class CapnpUtil {
+public class ProtoFactory {
 
-  public static MessageBuilder builder(BaseMessage.Reader reader) {
+  public ProtoFactory() { }
+
+  public MessageBuilder builder(BaseMessage.Reader reader) {
     MessageBuilder message = new MessageBuilder();
     message.setRoot(BaseMessage.factory, reader);
     return message;
   }
 
-  public static MessageBuilder error(int code) {
+  public MessageBuilder error(int code) {
     MessageBuilder      message     = new MessageBuilder();
     BaseMessage.Builder baseMessage = message.initRoot(BaseMessage.factory);
     Error.Builder       error       = baseMessage.initError();
@@ -48,12 +49,12 @@ public class CapnpUtil {
     return message;
   }
 
-  public static MessageBuilder capabilities(double latitude,
-                                            double longitude,
-                                            int    polarization,
-                                            double minFreq,
-                                            double maxFreq,
-                                            long   rate)
+  public MessageBuilder capabilities(double latitude,
+                                     double longitude,
+                                     int    polarization,
+                                     double minFreq,
+                                     double maxFreq,
+                                     long   rate)
   {
     MessageBuilder       message      = new MessageBuilder();
     BaseMessage.Builder  baseMessage  = message.initRoot(BaseMessage.factory);
@@ -71,31 +72,10 @@ public class CapnpUtil {
     return message;
   }
 
-  public static MessageBuilder capabilities(double      latitude,
-                                            double      longitude,
-                                            int         polarization,
-                                            ChannelSpec spec)
-  {
-    return capabilities(
-        latitude,          longitude,         polarization,
-        spec.getMinFreq(), spec.getMaxFreq(), spec.getSampleRate()
-    );
-  }
-
-  public static MessageBuilder channelRequest(ChannelRequest.Reader request) {
-    MessageBuilder      message     = new MessageBuilder();
-    BaseMessage.Builder baseMessage = message.initRoot(BaseMessage.factory);
-
-    baseMessage.setType(Type.CHANNEL_REQUEST);
-    baseMessage.setChannelRequest(request);
-
-    return message;
-  }
-
-  public static ChannelRequest.Reader channelRequest(double frequency,
-                                                     double bandwidth,
-                                                     long   sampleRate,
-                                                     long   maxRateDiff)
+  public ChannelRequest.Reader channelRequest(double frequency,
+                                              double bandwidth,
+                                              long   sampleRate,
+                                              long   maxRateDiff)
   {
     MessageBuilder         message = new MessageBuilder();
     ChannelRequest.Builder request = message.initRoot(ChannelRequest.factory);
@@ -108,7 +88,17 @@ public class CapnpUtil {
     return request.asReader();
   }
 
-  public static MessageBuilder state(Long sampleRate, Double frequency) {
+  public MessageBuilder channelRequest(ChannelRequest.Reader request) {
+    MessageBuilder      message     = new MessageBuilder();
+    BaseMessage.Builder baseMessage = message.initRoot(BaseMessage.factory);
+
+    baseMessage.setType(Type.CHANNEL_REQUEST);
+    baseMessage.setChannelRequest(request);
+
+    return message;
+  }
+
+  public MessageBuilder state(Long sampleRate, Double frequency) {
     MessageBuilder       message     = new MessageBuilder();
     BaseMessage.Builder  baseMessage = message.initRoot(BaseMessage.factory);
     ChannelState.Builder state       = baseMessage.initChannelState();
@@ -120,7 +110,7 @@ public class CapnpUtil {
     return message;
   }
 
-  public static MessageBuilder samples(int sampleCount) {
+  public MessageBuilder samples(int sampleCount) {
     MessageBuilder      message     = new MessageBuilder();
     BaseMessage.Builder baseMessage = message.initRoot(BaseMessage.factory);
     Samples.Builder     samples     = baseMessage.initSamples();
@@ -131,13 +121,13 @@ public class CapnpUtil {
     return message;
   }
 
-  public static ChannelSpec spec(ChannelRequest.Reader request) {
+  public ChannelSpec spec(ChannelRequest.Reader request) {
     return new ChannelSpec(request.getCenterFrequency(),
                            request.getBandwidth(),
                            request.getSampleRate());
   }
 
-  public static ChannelSpec spec(Capabilities.Reader capabilities) {
+  public ChannelSpec spec(Capabilities.Reader capabilities) {
     return ChannelSpec.fromMinMax(capabilities.getMinFrequency(),
                                   capabilities.getMaxFrequency(),
                                   capabilities.getMaxChannelRate());

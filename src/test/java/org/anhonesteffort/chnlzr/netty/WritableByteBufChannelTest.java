@@ -19,7 +19,6 @@ package org.anhonesteffort.chnlzr.netty;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import org.anhonesteffort.chnlzr.netty.WritableByteBufChannel;
 import org.junit.Test;
 
 import java.nio.ByteBuffer;

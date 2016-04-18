@@ -20,7 +20,7 @@ package org.anhonesteffort.chnlzr.netty;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
-import org.anhonesteffort.chnlzr.capnp.CapnpUtil;
+import org.anhonesteffort.chnlzr.capnp.ProtoFactory;
 import org.capnproto.MessageBuilder;
 
 import java.util.Queue;
@@ -30,6 +30,7 @@ import static org.anhonesteffort.chnlzr.capnp.Proto.Error;
 
 public class WriteQueuingContext {
 
+  private final ProtoFactory          proto = new ProtoFactory();
   private final ChannelHandlerContext context;
   private final Queue<MessageBuilder> msgQueue;
 
@@ -71,7 +72,7 @@ public class WriteQueuingContext {
     if (context.channel().isWritable() && msgQueue.isEmpty()) {
       context.writeAndFlush(message);
     } else if (!msgQueue.offer(message)) {
-      context.writeAndFlush(CapnpUtil.error(Error.ERROR_OVERFLOW))
+      context.writeAndFlush(proto.error(Error.ERROR_OVERFLOW))
              .addListener(ChannelFutureListener.CLOSE);
     }
   }
