@@ -4,7 +4,7 @@ using Cxx = import "/capnp/c++.capnp";
 $Cxx.namespace("chnlzr");
 
 using Java = import "/capnp/java.capnp";
-$Java.package("org.anhonesteffort.chnlzr");
+$Java.package("org.anhonesteffort.chnlzr.capnp");
 $Java.outerClassname("Proto");
 
 const polarizationVertical   :UInt32 = 1;

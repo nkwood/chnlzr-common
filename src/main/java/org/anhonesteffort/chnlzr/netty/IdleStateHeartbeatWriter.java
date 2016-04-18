@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.anhonesteffort.chnlzr.pipeline;
+package org.anhonesteffort.chnlzr.netty;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

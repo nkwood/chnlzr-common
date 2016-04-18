@@ -15,12 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.anhonesteffort.chnlzr;
+package org.anhonesteffort.chnlzr.netty;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
+import org.anhonesteffort.chnlzr.netty.WriteQueuingContext;
 import org.capnproto.MessageBuilder;
 import org.junit.Test;
 import org.mockito.Mockito;

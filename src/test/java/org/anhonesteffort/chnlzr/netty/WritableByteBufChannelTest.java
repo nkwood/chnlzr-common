@@ -15,10 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.anhonesteffort.chnlzr;
+package org.anhonesteffort.chnlzr.netty;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import org.anhonesteffort.chnlzr.netty.WritableByteBufChannel;
 import org.junit.Test;
 
 import java.nio.ByteBuffer;

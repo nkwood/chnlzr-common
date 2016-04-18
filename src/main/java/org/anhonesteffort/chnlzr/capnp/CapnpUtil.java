@@ -15,18 +15,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.anhonesteffort.chnlzr;
+package org.anhonesteffort.chnlzr.capnp;
 
 import org.anhonesteffort.dsp.ChannelSpec;
 import org.capnproto.MessageBuilder;
 
-import static org.anhonesteffort.chnlzr.Proto.BaseMessage;
-import static org.anhonesteffort.chnlzr.Proto.Error;
-import static org.anhonesteffort.chnlzr.Proto.Capabilities;
-import static org.anhonesteffort.chnlzr.Proto.ChannelRequest;
-import static org.anhonesteffort.chnlzr.Proto.ChannelState;
-import static org.anhonesteffort.chnlzr.Proto.Samples;
-import static org.anhonesteffort.chnlzr.Proto.BaseMessage.Type;
+import static org.anhonesteffort.chnlzr.capnp.Proto.BaseMessage;
+import static org.anhonesteffort.chnlzr.capnp.Proto.Error;
+import static org.anhonesteffort.chnlzr.capnp.Proto.Capabilities;
+import static org.anhonesteffort.chnlzr.capnp.Proto.ChannelRequest;
+import static org.anhonesteffort.chnlzr.capnp.Proto.ChannelState;
+import static org.anhonesteffort.chnlzr.capnp.Proto.Samples;
+import static org.anhonesteffort.chnlzr.capnp.Proto.BaseMessage.Type;
 
 public class CapnpUtil {
 

@@ -15,17 +15,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.anhonesteffort.chnlzr;
+package org.anhonesteffort.chnlzr.netty;
 
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
+import org.anhonesteffort.chnlzr.capnp.CapnpUtil;
 import org.capnproto.MessageBuilder;
 
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import static org.anhonesteffort.chnlzr.Proto.Error;
+import static org.anhonesteffort.chnlzr.capnp.Proto.Error;
 
 public class WriteQueuingContext {
 
@@ -53,14 +54,16 @@ public class WriteQueuingContext {
     while (message != null) {
       context.write(message);
 
-      if (context.channel().isWritable())
+      if (context.channel().isWritable()) {
         message = msgQueue.poll();
-      else
+      } else {
         message = null;
+      }
     }
 
-    if (flush)
+    if (flush) {
       context.flush();
+    }
   }
 
   public void writeOrQueue(MessageBuilder message) {

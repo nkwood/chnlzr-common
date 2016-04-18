@@ -15,13 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.anhonesteffort.chnlzr.pipeline;
+package org.anhonesteffort.chnlzr.capnp;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
-import org.anhonesteffort.chnlzr.WritableByteBufChannel;
+import org.anhonesteffort.chnlzr.netty.WritableByteBufChannel;
 import org.capnproto.MessageBuilder;
 import org.capnproto.SerializePacked;
 

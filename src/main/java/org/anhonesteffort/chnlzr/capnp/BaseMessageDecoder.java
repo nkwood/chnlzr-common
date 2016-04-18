@@ -15,12 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.anhonesteffort.chnlzr.pipeline;
+package org.anhonesteffort.chnlzr.capnp;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
-import org.anhonesteffort.chnlzr.ReadableByteBufChannel;
+import org.anhonesteffort.chnlzr.netty.ReadableByteBufChannel;
 import org.capnproto.SerializePacked;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.List;
 
-import static org.anhonesteffort.chnlzr.Proto.BaseMessage;
+import static org.anhonesteffort.chnlzr.capnp.Proto.BaseMessage;
 
 public class BaseMessageDecoder extends ByteToMessageDecoder {
 
@@ -59,10 +59,9 @@ public class BaseMessageDecoder extends ByteToMessageDecoder {
       } finally {
         messageLength = -1;
       }
-    }
-
-    else if (messageLength == 0)
+    } else if (messageLength == 0) {
       messageLength = -1;
+    }
   }
 
 }

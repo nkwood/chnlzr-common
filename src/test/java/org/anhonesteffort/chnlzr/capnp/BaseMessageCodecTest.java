@@ -15,11 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.anhonesteffort.chnlzr.pipeline;
+package org.anhonesteffort.chnlzr.capnp;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
+import org.anhonesteffort.chnlzr.netty.IdleStateHeartbeatWriter;
 import org.capnproto.MessageBuilder;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -27,9 +28,9 @@ import org.mockito.Mockito;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.anhonesteffort.chnlzr.Proto.BaseMessage;
-import static org.anhonesteffort.chnlzr.Proto.Capabilities;
-import static org.anhonesteffort.chnlzr.Proto.BaseMessage.Type;
+import static org.anhonesteffort.chnlzr.capnp.Proto.BaseMessage;
+import static org.anhonesteffort.chnlzr.capnp.Proto.Capabilities;
+import static org.anhonesteffort.chnlzr.capnp.Proto.BaseMessage.Type;
 
 public class BaseMessageCodecTest {
 
