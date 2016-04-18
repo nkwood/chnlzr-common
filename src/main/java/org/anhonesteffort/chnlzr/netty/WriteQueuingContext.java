@@ -45,8 +45,9 @@ public class WriteQueuingContext {
   }
 
   public void onWritabilityChanged() {
-    if (!context.channel().isWritable())
+    if (!context.channel().isWritable()) {
       return;
+    }
 
     MessageBuilder message = msgQueue.poll();
     boolean        flush   = message != null;

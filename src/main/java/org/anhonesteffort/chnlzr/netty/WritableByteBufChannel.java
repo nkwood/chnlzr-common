@@ -34,8 +34,9 @@ public class WritableByteBufChannel implements WritableByteChannel {
 
   @Override
   public int write(ByteBuffer src) throws ClosedChannelException {
-    if (!isOpen())
+    if (!isOpen()) {
       throw new ClosedChannelException();
+    }
 
     int previousWriterIndex = byteBuf.writerIndex();
     byteBuf.writeBytes(src);

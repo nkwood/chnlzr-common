@@ -28,6 +28,7 @@ import static org.anhonesteffort.chnlzr.capnp.Proto.ChannelState;
 import static org.anhonesteffort.chnlzr.capnp.Proto.Samples;
 import static org.anhonesteffort.chnlzr.capnp.Proto.BaseMessage.Type;
 
+// todo: no static
 public class CapnpUtil {
 
   public static MessageBuilder builder(BaseMessage.Reader reader) {

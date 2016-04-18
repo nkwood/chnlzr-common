@@ -36,15 +36,17 @@ public class ReadableByteBufChannel implements ReadableByteChannel {
 
   @Override
   public int read(ByteBuffer dst) throws ClosedChannelException {
-    if (!isOpen())
+    if (!isOpen()) {
       throw new ClosedChannelException();
+    }
 
     int bytesRemaining = bytesToRead - bytesRead;
     int bytesAvailable = byteBuf.readableBytes();
     int bytesToPut     = Math.min(Math.min(bytesRemaining, bytesAvailable), dst.remaining());
 
-    if (bytesToPut < 1)
+    if (bytesToPut < 1) {
       return 0;
+    }
 
     dst.put(byteBuf.readBytes(bytesToPut).array());
 
