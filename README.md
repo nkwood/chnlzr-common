@@ -1,6 +1,6 @@
 # chnlzr-common
 
-common java package for interacting with Chnlzr services.
+Library for interacting with chnlzr services.
 
 ## Build and Install
 ```
