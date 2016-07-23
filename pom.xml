@@ -37,7 +37,7 @@
         </repository>
         <repository>
             <id>dsp-common-mvn-repo</id>
-            <url>https://raw.github.com/rhodey/dsp-common/mvn-repo/</url>
+            <url>https://raw.github.com/radiowitness/dsp-common/mvn-repo/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
