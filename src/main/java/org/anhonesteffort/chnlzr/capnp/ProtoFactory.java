@@ -17,7 +17,7 @@
 
 package org.anhonesteffort.chnlzr.capnp;
 
-import org.anhonesteffort.dsp.ChannelSpec;
+import org.anhonesteffort.dsp.util.ChannelSpec;
 import org.capnproto.MessageBuilder;
 
 import static org.anhonesteffort.chnlzr.capnp.Proto.BaseMessage;

@@ -18,6 +18,7 @@
 package org.anhonesteffort.chnlzr.netty;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.util.ReferenceCountUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.channels.ClosedChannelException;
@@ -48,8 +49,23 @@ public class ReadableByteBufChannel implements ReadableByteChannel {
       return 0;
     }
 
-    dst.put(byteBuf.readBytes(bytesToPut).array());
+    byte[]  putBytes;
+    ByteBuf putBuf = byteBuf.readBytes(bytesToPut);
 
+    try {
+
+      if (putBuf.hasArray()) {
+        putBytes = putBuf.array();
+      } else {
+        putBytes = new byte[bytesToPut];
+        putBuf.getBytes(putBuf.readerIndex(), putBytes);
+      }
+
+    } finally {
+      ReferenceCountUtil.release(putBuf);
+    }
+
+    dst.put(putBytes);
     bytesRead += bytesToPut;
     return bytesToPut;
   }

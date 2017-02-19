@@ -20,18 +20,15 @@ package org.anhonesteffort.chnlzr.netty;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleStateEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @ChannelHandler.Sharable
-public class IdleStateHeartbeatWriter extends ChannelHandlerAdapter {
+public class IdleStateHeartbeatWriter extends ChannelInboundHandlerAdapter {
 
   public static final IdleStateHeartbeatWriter INSTANCE = new IdleStateHeartbeatWriter();
   public static final ByteBuf HEARTBEAT_BYTES = Unpooled.unreleasableBuffer(Unpooled.copyInt(0x00));
-  private static final Logger log = LoggerFactory.getLogger(IdleStateHeartbeatWriter.class);
 
   private IdleStateHeartbeatWriter() {
     super();

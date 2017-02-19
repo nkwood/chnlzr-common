@@ -24,7 +24,7 @@
 
     <groupId>org.anhonesteffort.chnlzr</groupId>
     <artifactId>chnlzr-common</artifactId>
-    <version>0.4.0</version>
+    <version>1.0</version>
 
     <repositories>
         <repository>
@@ -48,12 +48,12 @@
         <dependency>
             <groupId>org.anhonesteffort.dsp</groupId>
             <artifactId>dsp-common</artifactId>
-            <version>0.3.4</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>5.0.0.Alpha2</version>
+            <version>4.1.8.Final</version>
         </dependency>
         <dependency>
             <groupId>org.capnproto</groupId>
