@@ -24,8 +24,6 @@ import java.util.Properties;
 public class ChnlzrConfig {
 
   protected final Properties properties;
-  private   final int        bufferHighWaterMark;
-  private   final int        bufferLowWaterMark;
   private   final int        connectionTimeoutMs;
   private   final long       idleStateThresholdMs;
   private   final int        clientWriteQueueSize;
@@ -34,19 +32,9 @@ public class ChnlzrConfig {
     properties = new Properties();
     properties.load(new FileInputStream("chnlzr.properties"));
 
-    bufferHighWaterMark  = Integer.parseInt(properties.getProperty("buffer_high_water_mark"));
-    bufferLowWaterMark   = Integer.parseInt(properties.getProperty("buffer_low_water_mark"));
     connectionTimeoutMs  = Integer.parseInt(properties.getProperty("connection_timeout_ms"));
     idleStateThresholdMs = Long.parseLong(properties.getProperty("idle_state_threshold_ms"));
     clientWriteQueueSize = Integer.parseInt(properties.getProperty("client_write_queue_size"));
-  }
-
-  public int bufferHighWaterMark() {
-    return bufferHighWaterMark;
-  }
-
-  public int bufferLowWaterMark() {
-    return bufferLowWaterMark;
   }
 
   public int connectionTimeoutMs() {
